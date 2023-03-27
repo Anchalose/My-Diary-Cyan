@@ -1,0 +1,57 @@
+<div class="main-container">
+  <div class="form-inline">
+    <div class="row">
+      <div class="col-11 rightAlign">
+        <button (click)="addDiary()" class="btn btn-primary rightAlign">Add Diary</button>
+      </div>
+    </div>
+    <div class="row baseMargin">
+      <div class="col-11">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" [(ngModel)]="searchQuery" type="search"
+            placeholder="Search by content text" aria-label="Search">
+          <div class="input-group-append searchBtn">
+            <button class="btn btn-sidebar" (click)="searchEntries()">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row baseMargin">
+      <div class="col-11">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Diary Entries</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Created Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let entry of entries">
+                  <td>{{entry.id}}.</td>
+                  <td>{{ entry.title }}</td>
+                  <td>{{ entry.content }}</td>
+                  <td>{{ entry.createdTime | date }}</td>
+                  <td>
+                    <span [routerLink]="['/diary', entry.id]" class="badge bg-info appBadge">View</span>
+                    <span (click)="removeEntry(entry.id)" class="badge bg-danger appBadge">Delete</span>
+                    <span (click)="openPopup()" class="badge bg-warning appBadge">Share</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
